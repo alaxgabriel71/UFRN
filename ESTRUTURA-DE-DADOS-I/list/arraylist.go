@@ -91,3 +91,14 @@ func (arraylist *ArrayList) RemoveOnIndex(index int) {
 		}
 	}
 }
+
+// returns the array's value indicated by the index
+func (arraylist *ArrayList) Get(index int) int {
+	var val int
+	if !arraylist.isEmpty() {
+		if arraylist.checkIndex(index, false) {
+			val = arraylist.values[index]
+		}
+	}
+	return val
+}

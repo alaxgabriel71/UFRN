@@ -22,5 +22,8 @@ func main() {
 	array.RemoveOnIndex(0)
 	array.RemoveOnIndex(-1)
 	fmt.Println(array)
-	fmt.Println(array.Size())
+	fmt.Println("Size ->", array.Size())
+	for i := 0; i < array.Size(); i++ {
+		fmt.Println("[", i, "]=",array.Get(i))
+	}
 }
