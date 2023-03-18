@@ -5,7 +5,7 @@ type ArrayList struct {
 	size   int
 }
 
-// initialize the array's value with 10 of capacity
+// initializes the array's value with 10 of capacity
 // and the array's size with 0
 func (arraylist *ArrayList) Init() {
 	arraylist.values = make([]int, 10)
