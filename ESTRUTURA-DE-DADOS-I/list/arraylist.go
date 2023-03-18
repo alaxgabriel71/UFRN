@@ -28,6 +28,23 @@ func (arraylist *ArrayList) checkCapacity() {
 	}
 }
 
+// validates the index range
+func (arraylist *ArrayList) checkIndex(index int, add bool) bool {
+	var limit int
+	switch add {
+	case true :
+		limit = arraylist.size + 1
+	default:
+		limit = arraylist.size 
+	}
+	
+	if index >=0 && index < limit {
+		return true
+	} else {
+		return false
+	}
+}
+
 // adds a value in the array's end
 func (arraylist *ArrayList) Add(value int) {
 	arraylist.checkCapacity()
