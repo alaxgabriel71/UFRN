@@ -51,3 +51,15 @@ func (arraylist *ArrayList) Add(value int) {
 	arraylist.values[arraylist.size] = value
 	arraylist.size++
 }
+
+// adds a value to the array in the indicated index
+func (arraylist *ArrayList) AddOnIndex(value int, index int) {
+	if arraylist.checkIndex(index, true) {
+		arraylist.checkCapacity()
+		for i := arraylist.size; i > index; i-- {
+			arraylist.values[i] = arraylist.values[i-1]
+		}
+		arraylist.values[index] = value
+		arraylist.size++
+	}
+}
