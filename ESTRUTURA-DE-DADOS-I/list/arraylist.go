@@ -29,16 +29,8 @@ func (arraylist *ArrayList) checkCapacity() {
 }
 
 // validates the index range
-func (arraylist *ArrayList) checkIndex(index int, add bool) bool {
-	var limit int
-	switch add {
-	case true :
-		limit = arraylist.size + 1
-	default:
-		limit = arraylist.size 
-	}
-	
-	if index >=0 && index < limit {
+func (arraylist *ArrayList) checkIndex(index int) bool {
+	if index >=0 && index < arraylist.size {
 		return true
 	} else {
 		return false
@@ -63,7 +55,9 @@ func (arraylist *ArrayList) Add(value int) {
 
 // adds a value to the array in the indicated index
 func (arraylist *ArrayList) AddOnIndex(value int, index int) {
-	if arraylist.checkIndex(index, true) {
+	if index == arraylist.size {
+		arraylist.Add(value)
+	} else if arraylist.checkIndex(index) {
 		arraylist.checkCapacity()
 		for i := arraylist.size; i > index; i-- {
 			arraylist.values[i] = arraylist.values[i-1]
@@ -83,7 +77,7 @@ func (arraylist *ArrayList) Remove() {
 // removes the value on the indicated index
 func (arraylist *ArrayList) RemoveOnIndex(index int) {
 	if !arraylist.isEmpty() {
-		if arraylist.checkIndex(index, false) {
+		if arraylist.checkIndex(index) {
 			for i := index; i < arraylist.size; i++ {
 				arraylist.values[i] = arraylist.values[i+1]
 			}
@@ -96,7 +90,7 @@ func (arraylist *ArrayList) RemoveOnIndex(index int) {
 func (arraylist *ArrayList) Get(index int) int {
 	var val int
 	if !arraylist.isEmpty() {
-		if arraylist.checkIndex(index, false) {
+		if arraylist.checkIndex(index) {
 			val = arraylist.values[index]
 		}
 	}
@@ -106,7 +100,7 @@ func (arraylist *ArrayList) Get(index int) int {
 // replaces a value in the array's position indicated by the index
 func (arraylist *ArrayList) Set(value int, index int) {
 	if !arraylist.isEmpty() {
-		if arraylist.checkIndex(index, false) {
+		if arraylist.checkIndex(index) {
 			arraylist.values[index] = value
 		}
 	}
