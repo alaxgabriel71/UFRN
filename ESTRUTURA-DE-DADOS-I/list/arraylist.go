@@ -63,3 +63,22 @@ func (arraylist *ArrayList) AddOnIndex(value int, index int) {
 		arraylist.size++
 	}
 }
+
+// removes the array's last value
+func (arraylist *ArrayList) Remove() {
+	if !arraylist.isEmpty() {
+		arraylist.size--
+	}
+}
+
+// removes the value on the indicated index
+func (arraylist *ArrayList) RemoveOnIndex(index int) {
+	if !arraylist.isEmpty() {
+		if arraylist.checkIndex(index, false) {
+			for i := index; i < arraylist.size; i++ {
+				arraylist.values[i] = arraylist.values[i+1]
+			}
+			arraylist.size--
+		}
+	}
+}
