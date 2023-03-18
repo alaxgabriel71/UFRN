@@ -7,6 +7,6 @@ type IList interface {
 	Remove()
 	RemoveOnIndex(index int)
 	Get(index int)
-	Set(value int, inde int)
+	Set(value int, index int)
 	Size()
 }

@@ -102,3 +102,12 @@ func (arraylist *ArrayList) Get(index int) int {
 	}
 	return val
 }
+
+// replaces a value in the array's position indicated by the index
+func (arraylist *ArrayList) Set(value int, index int) {
+	if !arraylist.isEmpty() {
+		if arraylist.checkIndex(index, false) {
+			arraylist.values[index] = value
+		}
+	}
+}
