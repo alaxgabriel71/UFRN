@@ -27,3 +27,10 @@ func (arraylist *ArrayList) checkCapacity() {
 		arraylist.values = newarray
 	}
 }
+
+// adds a value in the array's end
+func (arraylist *ArrayList) Add(value int) {
+	arraylist.checkCapacity()
+	arraylist.values[arraylist.size] = value
+	arraylist.size++
+}
