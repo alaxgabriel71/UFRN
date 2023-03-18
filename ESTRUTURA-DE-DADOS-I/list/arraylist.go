@@ -45,6 +45,15 @@ func (arraylist *ArrayList) checkIndex(index int, add bool) bool {
 	}
 }
 
+// verifies if the array is empty
+func (arraylist *ArrayList) isEmpty() bool {
+	if arraylist.size == 0 {
+		return true
+	} else {
+		return false
+	}
+}
+
 // adds a value in the array's end
 func (arraylist *ArrayList) Add(value int) {
 	arraylist.checkCapacity()
