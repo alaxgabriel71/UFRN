@@ -82,34 +82,7 @@ func (linkedlist *LinkedList) AddOnIndex(value int, index int) error {
 	}
 }
 
-// returns the value at the indicated position
-func (linkedlist *LinkedList) Get(index int) (int, error) {
-	k := 0
-	prevNode := Node{}
-	actualNode := Node{}
-
-	if index >= 0 && index < linkedlist.size {
-		prevNode.next = linkedlist.head.next
-		prevNode.value = linkedlist.head.value
-
-		for k < index {
-			if prevNode.next != nil {
-				actualNode.next = prevNode.next.next
-				actualNode.value = prevNode.next.value
-
-				prevNode.next = actualNode.next
-				prevNode.value = actualNode.value
-
-				k++
-			}
-		}
-		return prevNode.value, nil
-	} else {
-		return 0, errors.New("index out of range (Get)")
-	}
-}
-
-// removes the linked list's last items
+// removes the linked list's last item
 func (linkedlist *LinkedList) Remove() error {
 	if linkedlist.isEmpty() {
 		return errors.New("empty list (Remove)")
@@ -146,6 +119,34 @@ func (linkedlist *LinkedList) RemoveOnIndex(index int) error {
 	}
 }
 
+// returns the value at the indicated position
+func (linkedlist *LinkedList) Get(index int) (int, error) {
+	k := 0
+	prevNode := Node{}
+	actualNode := Node{}
+
+	if index >= 0 && index < linkedlist.size {
+		prevNode.next = linkedlist.head.next
+		prevNode.value = linkedlist.head.value
+
+		for k < index {
+			if prevNode.next != nil {
+				actualNode.next = prevNode.next.next
+				actualNode.value = prevNode.next.value
+
+				prevNode.next = actualNode.next
+				prevNode.value = actualNode.value
+
+				k++
+			}
+		}
+		return prevNode.value, nil
+	} else {
+		return 0, errors.New("index out of range (Get)")
+	}
+}
+
+// changes the value at the indicated index
 func (linkedlist *LinkedList) Set(value int, index int) error {
 	if index >= 0 && index < linkedlist.size {
 		actualNode := linkedlist.head

@@ -8,25 +8,27 @@ import (
 func main() {
 	//array := list.ArrayList{}
 	//var array *list.LinkedList = new(list.LinkedList)
-	array := list.LinkedList{}
+	array := list.DoublyLinkedList{}
 
 	array.Init()
-	erro7 := array.RemoveOnIndex(0)
+	/* erro7 := array.RemoveOnIndex(0)
 	if erro7 != nil {
 		fmt.Println(erro7)
-	}
+	} */
 	array.Add(55)
 	array.Add(66)
 	array.Add(77)
 	erro8 := array.AddOnIndex(88, 3)
-	erro6 := array.Set(99, 4)
+	array.Set(99, 4)
+
+	//erro6 := array.Set(99, 4)
 	if erro8 != nil {
 		fmt.Println(erro8)
 	}
 
-	if erro6 != nil {
+	/* if erro6 != nil {
 		fmt.Println(erro6)
-	}
+	} */
 	/* erro9 := array.RemoveOnIndex(3)
 	if erro9 != nil {
 		fmt.Println(erro9)
@@ -58,7 +60,7 @@ func main() {
 	// array.Add(1)
 	// array.Add(2)
 	// array.Add(3)
-	// array.AddOnIndex(99,1)
+	//array.AddOnIndex(99, 1)
 	// array.AddOnIndex(88,5)
 	// array.AddOnIndex(77,7)
 	// array.RemoveOnIndex(1)
@@ -66,9 +68,11 @@ func main() {
 	// array.RemoveOnIndex(4)
 	// array.RemoveOnIndex(0)
 	// array.RemoveOnIndex(-1)
-	// array.Set(55, 2)
-	// array.Set(55, 3)
-	// array.Set(55, -1)
+
+	// fmt.Println(array.Get(0))
+	// fmt.Println(array.Get(1))
+	// fmt.Println(array.Get(2))
+	//array.RunReverse()
 	fmt.Println(array)
 	fmt.Println("Size ->", array.Size())
 	//fmt.Println(array.Get(0))
