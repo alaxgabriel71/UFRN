@@ -45,6 +45,7 @@ func (linkedlist *LinkedList) Add(value int) {
 		linkedlist.head = &newNode
 		newNode.value = value
 		newNode.next = nil
+		linkedlist.size++
 	} else {
 		for actualNode.next != nil {
 			actualNode = actualNode.next
@@ -52,17 +53,22 @@ func (linkedlist *LinkedList) Add(value int) {
 		actualNode.next = &newNode
 		newNode.value = value
 		newNode.next = nil
+		linkedlist.size++
 	}
-	linkedlist.size++
 }
 
 // inserts a new value at the indicated index
 func (linkedlist *LinkedList) AddOnIndex(value int, index int) error {
 	newNode := Node{}
 	if index == 0 {
-		newNode.next = linkedlist.head
-		newNode.value = value
-		linkedlist.head = &newNode
+		if linkedlist.isEmpty() {
+			linkedlist.Add(value)
+		} else {
+			newNode.next = linkedlist.head
+			newNode.value = value
+			linkedlist.head = &newNode
+			linkedlist.size++
+		}
 		return nil
 	} else if linkedlist.indexIsValid(index) {
 		actualNode := linkedlist.head

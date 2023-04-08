@@ -60,13 +60,17 @@ func (doublylinkedlist *DoublyLinkedList) Add(value int) {
 // inserts a new value at the indicated index
 func (doublylinkedlist *DoublyLinkedList) AddOnIndex(value int, index int) error {
 	if index == 0 {
-		newNode := DoublyNode{}
-		newNode.value = value
-		newNode.prev = nil
-		newNode.next = doublylinkedlist.head
-		doublylinkedlist.head.prev = &newNode
-		doublylinkedlist.head = &newNode
-		doublylinkedlist.size++
+		if doublylinkedlist.size == 0 {
+			doublylinkedlist.Add(value)
+		} else {
+			newNode := DoublyNode{}
+			newNode.value = value
+			newNode.prev = nil
+			newNode.next = doublylinkedlist.head
+			doublylinkedlist.head.prev = &newNode
+			doublylinkedlist.head = &newNode
+			doublylinkedlist.size++
+		}
 		return nil
 	} else if index == doublylinkedlist.size {
 		doublylinkedlist.Add(value)

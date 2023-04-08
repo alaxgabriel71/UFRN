@@ -1,5 +1,9 @@
 package list
 
+import (
+	"errors"
+)
+
 type ArrayList struct {
 	values []int
 	size   int
@@ -7,14 +11,14 @@ type ArrayList struct {
 
 // initializes the array's value with 10 of capacity
 // and the array's size with 0
-func (arraylist *ArrayList) Init() {
-	arraylist.values = make([]int, 10)
-	arraylist.size = 0
-}
-
-// returns the array's size
-func (arraylist *ArrayList) Size() int {
-	return arraylist.size
+func (arraylist *ArrayList) Init(capacity int) error {
+	if capacity > 0 {
+		arraylist.values = make([]int, capacity)
+		arraylist.size = 0
+		return nil
+	} else {
+		return errors.New("can't init arraylist with size <= 0")
+	}
 }
 
 // duplicates the array's capacity if it's full
@@ -30,7 +34,7 @@ func (arraylist *ArrayList) checkCapacity() {
 
 // validates the index range
 func (arraylist *ArrayList) checkIndex(index int) bool {
-	if index >=0 && index < arraylist.size {
+	if index >= 0 && index < arraylist.size {
 		return true
 	} else {
 		return false
@@ -54,16 +58,21 @@ func (arraylist *ArrayList) Add(value int) {
 }
 
 // adds a value to the array in the indicated index
-func (arraylist *ArrayList) AddOnIndex(value int, index int) {
-	if index == arraylist.size {
-		arraylist.Add(value)
-	} else if arraylist.checkIndex(index) {
-		arraylist.checkCapacity()
-		for i := arraylist.size; i > index; i-- {
-			arraylist.values[i] = arraylist.values[i-1]
+func (arraylist *ArrayList) AddOnIndex(value int, index int) error {
+	if arraylist.checkIndex(index) || index == arraylist.size {
+		if index == arraylist.size {
+			arraylist.Add(value)
+		} else if arraylist.checkIndex(index) {
+			arraylist.checkCapacity()
+			for i := arraylist.size; i > index; i-- {
+				arraylist.values[i] = arraylist.values[i-1]
+			}
+			arraylist.values[index] = value
+			arraylist.size++
 		}
-		arraylist.values[index] = value
-		arraylist.size++
+		return nil
+	} else {
+		return errors.New("index out of range (AddOnIndex)")
 	}
 }
 
@@ -75,33 +84,50 @@ func (arraylist *ArrayList) Remove() {
 }
 
 // removes the value on the indicated index
-func (arraylist *ArrayList) RemoveOnIndex(index int) {
+func (arraylist *ArrayList) RemoveOnIndex(index int) error {
 	if !arraylist.isEmpty() {
 		if arraylist.checkIndex(index) {
-			for i := index; i < arraylist.size; i++ {
+			for i := index; i < arraylist.size-1; i++ {
 				arraylist.values[i] = arraylist.values[i+1]
 			}
 			arraylist.size--
 		}
+		return nil
+	} else {
+		return errors.New("index out of range (RemoveOnIndex)")
 	}
 }
 
 // returns the array's value indicated by the index
-func (arraylist *ArrayList) Get(index int) int {
-	var val int
-	if !arraylist.isEmpty() {
-		if arraylist.checkIndex(index) {
-			val = arraylist.values[index]
+func (arraylist *ArrayList) Get(index int) (int, error) {
+	if arraylist.checkIndex(index) {
+		var val int
+		if !arraylist.isEmpty() {
+			if arraylist.checkIndex(index) {
+				val = arraylist.values[index]
+			}
 		}
+		return val, nil
+	} else {
+		return -1, errors.New("index out of range (Get)")
 	}
-	return val
 }
 
 // replaces a value in the array's position indicated by the index
-func (arraylist *ArrayList) Set(value int, index int) {
-	if !arraylist.isEmpty() {
-		if arraylist.checkIndex(index) {
-			arraylist.values[index] = value
+func (arraylist *ArrayList) Set(value int, index int) error {
+	if arraylist.checkIndex(index) {
+		if !arraylist.isEmpty() {
+			if arraylist.checkIndex(index) {
+				arraylist.values[index] = value
+			}
 		}
+		return nil
+	} else {
+		return errors.New("index out of range (Set)")
 	}
+}
+
+// returns the array's size
+func (arraylist *ArrayList) Size() int {
+	return arraylist.size
 }
