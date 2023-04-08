@@ -9,7 +9,7 @@ type ArrayList struct {
 	size   int
 }
 
-// initializes the array's value with 10 of capacity
+// initializes the array's value with the indicated capacity
 // and the array's size with 0
 func (arraylist *ArrayList) Init(capacity int) error {
 	if capacity > 0 {
@@ -76,7 +76,7 @@ func (arraylist *ArrayList) AddOnIndex(value int, index int) error {
 	}
 }
 
-// removes the array's last value
+// removes the array's last value decrementing the array size
 func (arraylist *ArrayList) Remove() {
 	if !arraylist.isEmpty() {
 		arraylist.size--
@@ -115,11 +115,9 @@ func (arraylist *ArrayList) Get(index int) (int, error) {
 
 // replaces a value in the array's position indicated by the index
 func (arraylist *ArrayList) Set(value int, index int) error {
-	if arraylist.checkIndex(index) {
-		if !arraylist.isEmpty() {
-			if arraylist.checkIndex(index) {
-				arraylist.values[index] = value
-			}
+	if !arraylist.isEmpty() {
+		if arraylist.checkIndex(index) {
+			arraylist.values[index] = value
 		}
 		return nil
 	} else {
