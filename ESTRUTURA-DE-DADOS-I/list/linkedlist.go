@@ -172,3 +172,20 @@ func (linkedlist *LinkedList) Set(value int, index int) error {
 func (linkedlist *LinkedList) Size() int {
 	return linkedlist.size
 }
+
+// reverts the list
+func (linkedlist *LinkedList) Reverse() error {
+	if linkedlist.size >= 2 {
+		rlinkedlist := LinkedList{}
+
+		for i := linkedlist.size - 1; i >= 0; i-- {
+			val, _ := linkedlist.Get(i)
+			rlinkedlist.Add(val)
+		}
+
+		linkedlist.head = rlinkedlist.head
+		return nil
+	} else {
+		return errors.New("Impossible to reverse the list")
+	}
+}

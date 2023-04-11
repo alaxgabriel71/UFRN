@@ -6,40 +6,27 @@ import (
 )
 
 func main() {
-	array := list.ArrayList{}
 	linkedlist := list.LinkedList{}
-	doublylinkedlist := list.DoublyLinkedList{}
 
-	array.Init(10)
 	linkedlist.Init()
-	doublylinkedlist.Init()
 
-	array.AddOnIndex(99, 0)
-	array.AddOnIndex(99, 0)
-	array.AddOnIndex(99, 0)
-	array.AddOnIndex(99, 0)
-	array.AddOnIndex(99, 0)
-	array.AddOnIndex(99, 0)
-	array.AddOnIndex(99, 0)
-	array.AddOnIndex(99, 0)
-	array.AddOnIndex(99, 0)
-	array.AddOnIndex(99, 0)
-	fmt.Println(array.Size())
-	array.RemoveOnIndex(0)
-	/* array.RemoveOnIndex(0)
-	array.RemoveOnIndex(0)
-	array.RemoveOnIndex(0)
-	array.RemoveOnIndex(0)
-	array.RemoveOnIndex(0)
-	array.RemoveOnIndex(0)
-	array.RemoveOnIndex(0)
-	array.RemoveOnIndex(0) */
-	fmt.Println(array.Size())
+	for i := 0; i < 10; i++ {
+		linkedlist.Add(i)
+	}
+	//fmt.Println(linkedlist.Size())
 
-	linkedlist.AddOnIndex(99, 0)
-	fmt.Println(linkedlist.Size())
+	/* for i := 0; i < 10; i++ {
+		val, _ := linkedlist.Get(i)
+		fmt.Println(val)
+	} */
 
-	doublylinkedlist.AddOnIndex(99, 0)
-	fmt.Println(doublylinkedlist.Size())
+	linkedlist.Reverse()
 
+	for i := 0; i < 10; i++ {
+		val, _ := linkedlist.Get(i)
+		fmt.Println(val)
+	}
+
+	/* val, _ := linkedlist.Get(0)
+	fmt.Println(val) */
 }
