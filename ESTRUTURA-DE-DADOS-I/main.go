@@ -2,31 +2,34 @@ package main
 
 import (
 	"fmt"
-	"local-packages/list"
+	"local-packages/stack"
 )
 
 func main() {
-	linkedlist := list.LinkedList{}
+	/* arrstack := stack.ArrayStack{}
 
-	linkedlist.Init()
+	arrstack.Init(10)
+	fmt.Println(arrstack.Peek())
 
-	for i := 0; i < 10; i++ {
-		linkedlist.Add(i)
-	}
-	//fmt.Println(linkedlist.Size())
-
-	/* for i := 0; i < 10; i++ {
-		val, _ := linkedlist.Get(i)
-		fmt.Println(val)
-	} */
-
-	linkedlist.Reverse()
-
-	for i := 0; i < 10; i++ {
-		val, _ := linkedlist.Get(i)
-		fmt.Println(val)
+	for i := 0; i < 20; i++ {
+		arrstack.Push(i)
 	}
 
-	/* val, _ := linkedlist.Get(0)
-	fmt.Println(val) */
+	for i := 0; i < 14; i++ {
+		fmt.Println(arrstack.Pop())
+	}
+
+	fmt.Println(arrstack.Peek()) */
+
+	llstack := stack.LinkedListStack{}
+
+	llstack.Init()
+
+	for i := 0; i < 10; i++ {
+		llstack.Push(i)
+	}
+
+	for i := -1; i < 12; i++ {
+		fmt.Println(llstack.Pop())
+	}
 }
