@@ -2,6 +2,7 @@ package list
 
 import (
 	"errors"
+	"fmt"
 )
 
 type LinkedList struct {
@@ -174,9 +175,10 @@ func (linkedlist *LinkedList) Size() int {
 }
 
 // reverts the list
-func (linkedlist *LinkedList) Reverse() error {
-	if linkedlist.size >= 2 {
+/* func (linkedlist *LinkedList) Reverse() error {
+	if linkedlist.size > 1 {
 		rlinkedlist := LinkedList{}
+		rlinkedlist.Init()
 
 		for i := linkedlist.size - 1; i >= 0; i-- {
 			val, _ := linkedlist.Get(i)
@@ -184,6 +186,37 @@ func (linkedlist *LinkedList) Reverse() error {
 		}
 
 		linkedlist.head = rlinkedlist.head
+		rlinkedlist.head = nil
+		return nil
+	} else {
+		return errors.New("Impossible to reverse the list")
+	}
+} */
+
+
+func (linkedlist *LinkedList) Reverse() error {
+	if linkedlist.size > 1 {
+		firstNode := Node{}
+		firstNode.value, _ = linkedlist.Get(linkedlist.size-1)
+		var newHead *Node
+		newHead = &firstNode
+		actualNode := Node{}
+
+		for i := linkedlist.size-2; i >= 0; i--{
+			newNode := Node{}
+			newNode.value, _ = linkedlist.Get(i)
+			actualNode.next = &newNode
+			if i == linkedlist.size-2 {
+				firstNode.next = &newNode
+				actualNode = newNode
+			} else if i == 0 {
+				newNode.next = nil
+			} else {
+				actualNode = newNode
+			}
+		}
+		fmt.Println(*newHead)
+		linkedlist.head = newHead
 		return nil
 	} else {
 		return errors.New("Impossible to reverse the list")
